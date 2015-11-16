@@ -1,0 +1,177 @@
+---
+title: "Math Homework Week 3"
+author: "Mauricio Sanchez"
+date: "November 15, 2015"
+output: html_document
+---
+
+Math Homework Week 3: Chapter 7 
+Excercises 1 through 10
+
+1. Normal distribution m = 35, sd = 10
+a) greater than 34?
+```{r}
+pnorm(34, mean = 35, sd = 10)
+```
+b) smaller than 42?
+```{r}
+pnorm(42, mean = 35, sd = 10)
+```
+c) between 28 and 34?
+```{r}
+pnorm(34, mean = 35, sd = 10) - pnorm(28, mean = 35, sd = 10)
+```
+
+2. The mean and the standard deviation of a normal distribution are: mean = 0, sd = 1
+b)
+```{r}
+m <- mean(0,8)
+m <- m + 75
+```
+new mean:
+```{r, echo=FALSE}
+print(m)
+```
+standard deviation:
+```{r}
+s <- 8 * 1
+```
+```{r, echo=FALSE}
+print(s)
+```
+
+3. The normal distribution is defined by the mean and the standard deviation
+4.
+5. a) What score would be needed to be in the 85th percentile?
+```{r}
+a <- qnorm(.85, mean = 70, sd = 8)
+print(a)
+```
+b) What score would be needed to be in the 22nd percentile?
+```{r}
+b <- qnorm(.22, mean = 70, sd = 8)
+print(b)
+```
+6. 
+7. Normal distribution, mean = 20, sd = 4. Find the Z
+scores for the following numbers: (a) 28 (b) 18 (c) 10 (d) 23
+```{r}
+a <- (28-20)/4
+print(a)
+b <- (18-20)/4
+print(b)
+c <- (10-20)/4
+print(c)
+d <- (23-20)/4;
+print(d)
+```
+8. Normal distribution, mean = 71, sd = 8
+a) What is the proportion of vehicles less than or equal to the speed limit?
+```{r}
+a <- pnorm(65, mean = 71, sd = 8, lower.tail = TRUE)
+print(a)
+```
+b) What proportion of the vehicles would be going less than 50 mph?
+```{r}
+b <- pnorm(50, mean = 71, sd = 8, lower.tail = TRUE)
+print(b)
+```
+c) What is the new speed limit based on this criterion?
+```{r}
+c <- qnorm(.10, mean = 71, sd = 8, lower.tail = FALSE)
+print(c)
+```
+9. Normal distribution, mean = 120, sd = 5. What is the probability it is above 127?
+```{r}
+x <- pnorm(127, 120, 5)
+print(x)
+```
+
+Chapter 9
+Excercises 6 - 15
+
+6. correlation = 0.60, n = 28, Find Probability if sample correlation > 0.65?
+```{r}
+val1 <- .5 * log((1+.6)/(1-.6))
+print(val1)
+val2 <- .5 * log((1+.65)/(1-.65))
+print(val2)
+```
+calculate standard error
+```{r}
+e <- 1 / sqrt(28 - 3)
+print(e)
+p <- pnorm(val2, mean = val1, sd = e)
+```
+The probability that the sample correlation coefficient would be greater than 0.65 is:
+```{r, echo = FALSE}
+print(p)
+```
+7. What would be the shape of the frequency distribution?
+The shape would be a bell-shaped curve. 
+
+8. Normal distribution, mean = 20, sd = 10. What is the probability that the difference score will be greater than 5?
+```{r}
+x <- (10^2)/2
+print(x)
+e <- sqrt(x)
+print(e)
+p <- pnorm(5, mean = 20, sd = e, lower.tail = TRUE) + pnorm(-5, mean = 20, sd = e)
+print(p)
+```
+9. What is the shape of the sampling distribution of r? 
+The shape is skewed unless r = 0
+
+In what way does the shape depend on the size of the population correlation?
+The skewdness of the graph is dependent on the size of the population
+
+10. Normal distribution, mean = 0, sd = 1, what is the probability it will be 0.5?
+```{r}
+p <- dnorm(.5, mean = 0, sd = 1)
+print(p)
+```
+
+11. Normal distribution, mean = 120, sd = 5. Four scores are randomly sampled. What is the probability that the mean of the four scores is above 127?
+```{r}
+rsamples <- (5^2)/4
+print(rsamples)
+s <- sqrt(rsamples)
+print(s)
+p <- pnorm(127, mean = 120, sd = s, lower.tail = FALSE)
+print(p)
+```
+
+Chapter 10
+Excercises 10 - 18
+10.
+An experimenter would take two sample data sets of patients blood-pressure readings. One data set before taking the medication and the other one after the medication has been taken by the patients. The experimenter would have to compare the data sets and conclude that the rate of success is at least 95% confidence to effectively conclude that the medication is effective.
+
+11. sd = 2.8
+a) Compute the 95% confidence interval on the mean based on the following sample of nine: 8, 9, 10, 13, 14, 16, 17, 20, 21
+```{r}
+m = sum(8, 9, 10, 13, 14, 16, 17, 20, 21)/9
+print(m)
+e = 2.8 / 3
+print(e)
+low_lim <- m - (1.96 * e)
+print(low_lim)
+up_lim <- m + (1.96 * e)
+print(up_lim)
+confidence <- (up_lim - low_lim) / 2
+print(confidence)
+```
+
+12. Coin Flip. n = 25, mean = 0.64 Compute the 95% confidence interval on the proportion of times this person can predict coin flips correctly.
+```{r}
+s = sqrt((0.64 * (1 - 0.64))/25)
+print(s)
+low_lim = 0.64 - ((1.96 * s) - (0.02))
+print(low_lim)
+up_lim = 0.64 + ((1.96 * s) + (0.02))
+print(up_lim)
+confidence <- (up_lim - low_lim) / 2
+print(confidence)
+```
+What conclusion can you draw about this test of his ability to predict the future?
+This person would be able to predict the future between 43% and 84% of the total coin flips with 95% confidence that the sample will be .188 of the sample mean .64.
+
